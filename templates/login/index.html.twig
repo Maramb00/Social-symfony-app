@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block bread %}
+→ Login
+{% endblock %}
+
+{% block body %}
+<div class="flex justify-center mt-20 ">
+    <form action="{{ path('app_login') }}" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+
+        {% if error %}
+            <div class="rounded-md p-2 border-red-300 bg-red-50 border dark:border-red-600 dark:bg-red-700 dark:text-white mb-4" role="alert">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        {% endif %}
+
+        <div >
+            <label 
+                class="block text-sm text-gray-700 dark:text-gray-700 font-medium">Email</label>
+            <input 
+                type="text" 
+                name="_username" 
+                value="{{ lastUsername }}" 
+                class="shadow border-gray-300 dark:border-gray-500 dark:text-gray-800 rounded-md border p-2 mt-1 mb-2" />
+        </div>
+
+        <div>
+            <label 
+                class="block text-sm text-gray-700 dark:text-gray-700 font-medium">Password</label>
+            <input type="password" 
+                name="_password" 
+                class=" shadow-sm border-gray-700 dark:border-gray-500 dark:text-gray-800 rounded-md border p-2 mt-1 mb-2" />
+        </div>
+
+        <input type="hidden" name="_target_path" 
+            value="/micro-post" />
+
+        <div>
+            <button type="submit" 
+                class="block flex justify-center w-6/12 shadow-sm border-transparent bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Login</button>
+        </div>
+    </form>
+</div>
+    <div class="mt-2 text-center text-gray-600 dark:text-gray-400">
+        Don't have an account? <a href="{{ path('app_register') }}">Register here</a>
+    </div>
+{% endblock %}
